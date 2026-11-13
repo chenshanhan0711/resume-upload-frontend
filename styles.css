@@ -1,0 +1,365 @@
+/* ============================================================
+   01-frontend-resume-upload 样式
+   依据可见稿近似实现（Figma API 不可用，非像素级导出）
+   ============================================================ */
+
+:root {
+  --brand-blue: #2f6fed;
+  --brand-blue-dark: #1e56c8;
+  --brand-blue-light: #e8f1ff;
+  --ink: #1f2a3a;
+  --ink-soft: #5c6b7d;
+  --line: #d9e3ee;
+  --surface: #ffffff;
+  --bg: #f4f7fb;
+  --shadow: 0 18px 44px rgba(31, 42, 58, 0.12);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
+    sans-serif;
+  color: var(--ink);
+  background: linear-gradient(160deg, #f7fafd 0%, var(--bg) 100%);
+  min-height: 100vh;
+}
+
+/* ---------- 页面左右两列 ---------- */
+.page {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  max-width: 1080px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 48px 40px;
+}
+
+.hero {
+  flex: 1 1 50%;
+}
+
+.card {
+  flex: 1 1 50%;
+  max-width: 460px;
+  margin-left: auto;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 36px 34px 28px;
+}
+
+/* ---------- 左列 ---------- */
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 0 18px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hero-title-top {
+  font-size: 54px;
+  letter-spacing: -0.5px;
+}
+
+.hero-title-sub {
+  font-size: 34px;
+  color: var(--brand-blue);
+  letter-spacing: -0.3px;
+}
+
+.hero-desc {
+  max-width: 440px;
+  margin: 0 0 28px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.hero-illustration {
+  width: min(340px, 100%);
+  height: auto;
+  display: block;
+}
+
+/* ---------- 右列卡片 ---------- */
+.card-title {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.card-subtitle {
+  margin: 0 0 22px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+/* 上传区 */
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px 20px 26px;
+  border: 2px dashed #a9c8f5;
+  border-radius: 12px;
+  background: #f5faff;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.18s ease, background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.upload-area:hover {
+  border-color: var(--brand-blue);
+  background: #eef5ff;
+}
+
+.upload-area:focus-within {
+  outline: 3px solid rgba(47, 111, 237, 0.35);
+  outline-offset: 2px;
+  border-color: var(--brand-blue);
+}
+
+.upload-area.is-dragging {
+  border-color: var(--brand-blue);
+  background: #e6f0ff;
+  transform: scale(1.01);
+}
+
+.cloud-icon {
+  width: 52px;
+  height: 52px;
+  color: var(--brand-blue);
+}
+
+.upload-prompt {
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.upload-prompt strong {
+  font-weight: 700;
+}
+
+.browse {
+  color: var(--brand-blue);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.upload-hint {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+/* 文件名 / 状态 */
+.file-status {
+  margin: 16px 0 20px;
+  min-height: 22px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.file-status.has-file {
+  color: #1f8a4c;
+}
+
+.file-status.error {
+  color: #c0392b;
+}
+
+.file-status .status-icon {
+  margin-right: 6px;
+}
+
+/* 按钮 */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.btn {
+  flex: 1 1 auto;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.16s ease, transform 0.08s ease,
+    box-shadow 0.16s ease;
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(47, 111, 237, 0.4);
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  background: var(--brand-blue-light);
+  color: var(--brand-blue-dark);
+}
+
+.btn-secondary:hover {
+  background: #d8e8ff;
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--brand-blue);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(47, 111, 237, 0.28);
+}
+
+.btn-primary:hover {
+  background: var(--brand-blue-dark);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(47, 111, 237, 0.28);
+}
+
+/* 三步进度线 */
+.steps {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  flex: 1 1 0;
+  position: relative;
+}
+
+/* 连接线 */
+.step:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--line);
+}
+
+.step-done:not(:first-child)::before {
+  background: var(--brand-blue);
+}
+
+.step-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e7edf4;
+  border: 2px solid #cdd9e5;
+  z-index: 1;
+}
+
+.step-done .step-dot {
+  background: var(--brand-blue);
+  border-color: var(--brand-blue);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.step-current .step-dot {
+  background: #fff;
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 4px rgba(47, 111, 237, 0.18);
+}
+
+.step-label {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.step-current .step-label {
+  color: var(--brand-blue);
+  font-weight: 700;
+}
+
+/* 视觉隐藏但可聚焦（保留无障碍） */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- 响应式：≤768px 上下结构 ---------- */
+@media (max-width: 768px) {
+  .page {
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px 20px 48px;
+    align-items: stretch;
+  }
+
+  .hero {
+    text-align: center;
+  }
+
+  .hero-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-illustration {
+    margin: 0 auto;
+    width: min(260px, 80%);
+  }
+
+  .hero-title-top {
+    font-size: 40px;
+  }
+
+  .hero-title-sub {
+    font-size: 27px;
+  }
+
+  .card {
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* 尊重系统"减少动效"偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .upload-area,
+  .btn {
+    transition: none;
+  }
+}
